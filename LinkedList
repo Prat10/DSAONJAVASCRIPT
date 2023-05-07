@@ -1,1 +1,103 @@
+//Important implementation of Javascript on Linked List for Project Purpose
 
+n a linked list, each element (node) holds a value and a reference (pointer) to the next element in the list. The first node in the list is called the head, and the last node is called the tail. The tail's reference is null to indicate the end of the list.
+
+Here is an example implementation of a singly linked list:
+******************************************
+class Node {
+  constructor(value) {
+    this.value = value;           //creating the Node intial step
+    this.next = null;
+  }
+}
+*******************************************
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.size = 0;
+  }
+****************************************
+  addToHead(value) {
+    const node = new Node(value);
+    if (!this.head) {
+      this.head = node;
+      this.tail = node;                  //this method is take value and add the newnode in the front
+    } else {
+      node.next = this.head;
+      this.head = node;
+    }
+    this.size++;
+  }
+*****************************************
+  addToTail(value) {
+    const node = new Node(value);
+    if (!this.head) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      this.tail.next = node;
+      this.tail = node;
+    }
+    this.size++;
+  }
+*************************************************
+  removeFromHead() {
+    if (!this.head) {
+      return null;
+    }
+    const value = this.head.value;
+    if (this.head === this.tail) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.head = this.head.next;
+    }
+    this.size--;
+    return value;
+  }
+***************************************************
+  removeFromTail() {
+    if (!this.head) {
+      return null;
+    }
+    const value = this.tail.value;
+    if (this.head === this.tail) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      let currentNode = this.head;
+      while (currentNode.next !== this.tail) {
+        currentNode = currentNode.next;
+      }
+      currentNode.next = null;
+      this.tail = currentNode;
+    }
+    this.size--;
+    return value;
+  }
+************************************************************
+  getSize() {
+    return this.size;
+  }
+************************************************************
+  printList() {
+    let currentNode = this.head;
+    let listString = '';
+    while (currentNode) {
+      listString += `${currentNode.value} -> `;
+      currentNode = currentNode.next;
+    }
+    listString += 'null';
+    console.log(listString);
+  }
+}
+************************************************************
+In this implementation, the Node class represents a single node in the list, and the LinkedList class represents the list itself. The class methods include:
+
+addToHead(value): Adds a new node with the given value to the head of the list.
+addToTail(value): Adds a new node with the given value to the tail of the list.
+removeFromHead(): Removes the node at the head of the list and returns its value.
+removeFromTail(): Removes the node at the tail of the list and returns its value.
+getSize(): Returns the number of nodes in the list.
+printList(): Prints the values of all nodes in the list in order.
